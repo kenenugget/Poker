@@ -8,7 +8,8 @@ deck = [
         '6♡', '5♡', '4♡', '3♡', '2♡', 'A♡', 'K♤', 'Q♤', 'J♤', '10♤', '9♤',
         '8♤', '7♤', '6♤', '5♤', '4♤', '3♤', '2♤', 'A♤'
     ]
-
+player_one_hand = []
+player_two_hand = []
 table_cards = []
 cards_left = 52
 
@@ -56,9 +57,7 @@ def shuffle_deck(deck):
             shuffled_deck = []
 
 
-def start_game(deck, cards_left):
-    player_one_hand = []
-    player_two_hand = []
+def start_game(deck, cards_left, player_one_hand, player_two_hand):
     x = 0
 
     while x < 4:
@@ -122,16 +121,16 @@ def river(deck, table_cards, cards_left):
 clear()
 shuffle_deck(deck)
 
-start_game(deck, cards_left)
+start_game(deck, cards_left, player_one_hand, player_two_hand)
 
 flop(deck, table_cards, cards_left)
-input(table_cards)
+input("Table cards:\n" + str(table_cards))
 clear()
 
 turn(deck, table_cards, cards_left)
-input(table_cards)
+input("Table cards:\n" + str(table_cards))
 clear()
 
 river(deck, table_cards, cards_left)
-input(table_cards)
+input("Table cards:\n" + str(table_cards) + "\n\nPlayer one hand:" + str(player_one_hand) + "\n\nPlayer two hand:" + str(player_two_hand))
 clear()
