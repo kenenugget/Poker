@@ -9,6 +9,9 @@ deck = [
         '8♤', '7♤', '6♤', '5♤', '4♤', '3♤', '2♤', 'A♤'
     ]
 
+table_cards = []
+cards_left = 52
+
 def clear():
     if os.name == 'nt':
         _ = os.system('cls')
@@ -53,11 +56,10 @@ def shuffle_deck(deck):
             shuffled_deck = []
 
 
-def start_game(deck):
+def start_game(deck, cards_left):
     player_one_hand = []
     player_two_hand = []
     x = 0
-    cards_left = 52
 
     while x < 4:
         card = random.randint(0, cards_left - 1)
@@ -84,6 +86,52 @@ def start_game(deck):
     input("Press enter when ready. Player two get player two to turn back around after pressing enter.")
     clear()
 
+    return cards_left, player_one_hand, player_two_hand, deck
 
+def flop(deck, table_cards, cards_left):
+    x = 0
+    while x < 3:
+        card = random.randint(0, cards_left - 1)
+        table_cards.append(deck[card])
+        
+        deck.pop(card)
+        x += 1
+        cards_left -= 1
+
+    return table_cards
+
+def turn(deck, table_cards, cards_left):
+    card = random.randint(0, cards_left - 1)
+    table_cards.append(deck[card])
+    
+    deck.pop(card)
+    cards_left -= 1
+
+    return table_cards
+
+def river(deck, table_cards, cards_left):
+    card = random.randint(0, cards_left - 1)
+    table_cards.append(deck[card])
+    
+    deck.pop(card)
+    cards_left -= 1
+
+    return table_cards
+
+
+clear()
 shuffle_deck(deck)
-start_game(deck)
+
+start_game(deck, cards_left)
+
+flop(deck, table_cards, cards_left)
+input(table_cards)
+clear()
+
+turn(deck, table_cards, cards_left)
+input(table_cards)
+clear()
+
+river(deck, table_cards, cards_left)
+input(table_cards)
+clear()
