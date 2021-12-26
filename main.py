@@ -2,16 +2,17 @@ import random
 import os
 
 deck = [
-        'K♢', 'Q♢', 'J♢', '10♢', '9♢', '8♢', '7♢', '6♢', '5♢', '4♢', '3♢',
-        '2♢', 'A♢', 'K♧', 'Q♧', 'J♧', '10♧', '9♧', '8♧', '7♧', '6♧', '5♧',
-        '4♧', '3♧', '2♧', 'A♧', 'K♡', 'Q♡', 'J♡', '10♡', '9♡', '8♡', '7♡',
-        '6♡', '5♡', '4♡', '3♡', '2♡', 'A♡', 'K♤', 'Q♤', 'J♤', '10♤', '9♤',
-        '8♤', '7♤', '6♤', '5♤', '4♤', '3♤', '2♤', 'A♤'
-    ]
+    'K♢', 'Q♢', 'J♢', '10♢', '9♢', '8♢', '7♢', '6♢', '5♢', '4♢', '3♢', '2♢',
+    'A♢', 'K♧', 'Q♧', 'J♧', '10♧', '9♧', '8♧', '7♧', '6♧', '5♧', '4♧', '3♧',
+    '2♧', 'A♧', 'K♡', 'Q♡', 'J♡', '10♡', '9♡', '8♡', '7♡', '6♡', '5♡', '4♡',
+    '3♡', '2♡', 'A♡', 'K♤', 'Q♤', 'J♤', '10♤', '9♤', '8♤', '7♤', '6♤', '5♤',
+    '4♤', '3♤', '2♤', 'A♤'
+]
 player_one_hand = []
 player_two_hand = []
 table_cards = []
 cards_left = 52
+
 
 def clear():
     if os.name == 'nt':
@@ -26,7 +27,7 @@ def shuffle_deck(deck):
     i = 0
     x = 0
 
-    times = random.randint(1,13)
+    times = random.randint(1, 13)
 
     if times == 0:
         print(deck)
@@ -76,42 +77,50 @@ def start_game(deck, cards_left, player_one_hand, player_two_hand):
         cards_left -= 1
         x += 1
 
-    input("Player two turn around. When only player one can see press enter.\n")
+    input(
+        "Player two turn around. When only player one can see press enter.\n")
     print("Player one: " + str(player_one_hand) + "\n")
-    input("Press enter when ready. Player one turn around and get player two to turn back around.")
+    input(
+        "Press enter when ready. Player one turn around and get player two to turn back around."
+    )
     clear()
     input("When only player two can see press enter.\n")
     print("Player two: " + str(player_two_hand) + "\n")
-    input("Press enter when ready. Player two get player two to turn back around after pressing enter.")
+    input(
+        "Press enter when ready. Player two get player two to turn back around after pressing enter."
+    )
     clear()
 
     return cards_left, player_one_hand, player_two_hand, deck
+
 
 def flop(deck, table_cards, cards_left):
     x = 0
     while x < 3:
         card = random.randint(0, cards_left - 1)
         table_cards.append(deck[card])
-        
+
         deck.pop(card)
         x += 1
         cards_left -= 1
 
     return table_cards
 
+
 def turn(deck, table_cards, cards_left):
     card = random.randint(0, cards_left - 1)
     table_cards.append(deck[card])
-    
+
     deck.pop(card)
     cards_left -= 1
 
     return table_cards
 
+
 def river(deck, table_cards, cards_left):
     card = random.randint(0, cards_left - 1)
     table_cards.append(deck[card])
-    
+
     deck.pop(card)
     cards_left -= 1
 
@@ -132,5 +141,6 @@ input("Table cards:\n" + str(table_cards))
 clear()
 
 river(deck, table_cards, cards_left)
-input("Table cards:\n" + str(table_cards) + "\n\nPlayer one hand: " + str(player_one_hand) + "\n\nPlayer two hand: " + str(player_two_hand))
+input("Table cards:\n" + str(table_cards) + "\n\nPlayer one hand: " +
+      str(player_one_hand) + "\n\nPlayer two hand: " + str(player_two_hand))
 clear()
