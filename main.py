@@ -132,5 +132,5 @@ input("Table cards:\n" + str(table_cards))
 clear()
 
 river(deck, table_cards, cards_left)
-input("Table cards:\n" + str(table_cards) + "\n\nPlayer one hand:" + str(player_one_hand) + "\n\nPlayer two hand:" + str(player_two_hand))
+input("Table cards:\n" + str(table_cards) + "\n\nPlayer one hand: " + str(player_one_hand) + "\n\nPlayer two hand: " + str(player_two_hand))
 clear()
