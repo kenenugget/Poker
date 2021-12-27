@@ -7,13 +7,20 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((LOCALHOST, PORT))
 server.listen(1)
 
+server.bind((LOCALHOST, PORT))
+server.listen(1)
 print("Server started")
 print("Waiting for client request..")
-
+clientConnection,clientAddress = server.accept()
+print("Connected clinet :" , clientAddress)
+msg = ''
 while True:
-    clientConnection,clientAddress = server.accept()
-    print("Connected clinet :" , clientAddress)
-    data = clientConnection.recv(1024)
-    print("From Client :" , data.decode())
-    clientConnection.send(bytes("Successfully Connected to Server!!",'UTF-8'))
-    clientConnection.close()
+  in_data = clientConnection.recv(1024)
+  msg = in_data.decode()
+  if msg=='bye':
+    break
+  print("From Client :" , msg)
+  out_data = input()
+  clientConnection.send(bytes(out_data,'UTF-8'))
+print("Client disconnected....")
+clientConnection.close()
