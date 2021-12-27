@@ -1,9 +1,12 @@
-import socket               # Import socket module
+import socket
 
-s = socket.socket()         # Create a socket object
-host = socket.gethostname() # Get local machine name
-port = 12345                # Reserve a port for your service.
+SERVER = "192.168.1.16"
+PORT = 8080
 
-s.connect((host, port))
-print (s.recv(1024))
-# s.close
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect((SERVER, PORT))
+client.sendall(bytes("This is from Client",'UTF-8'))
+data =  client.recv(1024)
+
+print(data.decode())
+client.close()

@@ -1,13 +1,19 @@
-import socket               # Import socket module
+import socket
 
-s = socket.socket()         # Create a socket object
-host = socket.gethostname() # Get local machine name
-port = 12345                # Reserve a port for your service.
-s.bind((host, port))        # Bind to the port
+LOCALHOST = "192.168.1.16"
+PORT = 8080
 
-s.listen(5)                 # Now wait for client connection.
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind((LOCALHOST, PORT))
+server.listen(1)
+
+print("Server started")
+print("Waiting for client request..")
+
 while True:
-   c, addr = s.accept()     # Establish connection with client.
-   print ('Got connection from', addr)
-   c.send('Thank you for connecting')
-#    c.close()                # Close the connection
+    clientConnection,clientAddress = server.accept()
+    print("Connected clinet :" , clientAddress)
+    data = clientConnection.recv(1024)
+    print("From Client :" , data.decode())
+    clientConnection.send(bytes("Successfully Connected to Server!!",'UTF-8'))
+    clientConnection.close()
