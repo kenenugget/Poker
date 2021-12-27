@@ -24,7 +24,7 @@ while True:
     break
 
   print("From Client :" , msg)
-  out_data = input()
+  out_data = input("Message: ")
   clientConnection.send(bytes(out_data,'UTF-8'))
 
 print("Client disconnected....")
