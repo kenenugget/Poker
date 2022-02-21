@@ -10,13 +10,16 @@ server.listen(1)
 print("Server started")
 print("Waiting for client request..")
 
-clientConnection,clientAddress = server.accept()
 
-print("Connected clinet :" , clientAddress)
 
 msg = ''
 
 while True:
+  clientConnection,clientAddress = server.accept()
+
+  print("Connected clinet :" , clientAddress)
+
+  
   in_data = clientConnection.recv(1024)
   msg = in_data.decode()
 
