@@ -11,7 +11,7 @@ try:
 except socket.error as e:
     print(str(e))
 
-res = ClientMultiSocket.recv(1024)
+res = ClientMultiSocket.recv(2048)
 
 while True:
     Input = input('Hey there: ')
