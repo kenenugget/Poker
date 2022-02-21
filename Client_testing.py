@@ -16,6 +16,6 @@ res = ClientMultiSocket.recv(1024)
 while True:
     Input = input('Hey there: ')
     ClientMultiSocket.send(str.encode(Input))
-    res = ClientMultiSocket.recv(1024)
+    res = ClientMultiSocket.recv(2048)
     print(res.decode('utf-8'))
 ClientMultiSocket.close()
