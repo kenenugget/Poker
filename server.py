@@ -1,6 +1,6 @@
 import socket
 
-LOCALHOST = "192.168.1.16"
+LOCALHOST = "192.168.1.17"
 PORT = 8080
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
