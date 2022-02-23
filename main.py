@@ -126,21 +126,21 @@ def river(deck, table_cards, cards_left):
 
     return table_cards
 
+if __name__ == "__main__":
+    clear()
+    shuffle_deck(deck)
 
-clear()
-shuffle_deck(deck)
+    start_game(deck, cards_left, player_one_hand, player_two_hand)
 
-start_game(deck, cards_left, player_one_hand, player_two_hand)
+    flop(deck, table_cards, cards_left)
+    input("Table cards:\n" + str(table_cards))
+    clear()
 
-flop(deck, table_cards, cards_left)
-input("Table cards:\n" + str(table_cards))
-clear()
+    turn(deck, table_cards, cards_left)
+    input("Table cards:\n" + str(table_cards))
+    clear()
 
-turn(deck, table_cards, cards_left)
-input("Table cards:\n" + str(table_cards))
-clear()
-
-river(deck, table_cards, cards_left)
-input("Table cards:\n" + str(table_cards) + "\n\nPlayer one hand: " +
-      str(player_one_hand) + "\n\nPlayer two hand: " + str(player_two_hand))
-clear()
+    river(deck, table_cards, cards_left)
+    input("Table cards:\n" + str(table_cards) + "\n\nPlayer one hand: " +
+        str(player_one_hand) + "\n\nPlayer two hand: " + str(player_two_hand))
+    clear()

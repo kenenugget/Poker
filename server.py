@@ -2,6 +2,7 @@ import socket
 import os
 from _thread import *
 import main
+from main import *
 
 Ss = socket.socket()
 LOCALHOST = "192.168.83.72"
@@ -33,5 +34,8 @@ while True:
     start_new_thread(multi_threaded_client, (Client, ))
     ThreadCount += 1
     print('Thread Number: ' + str(ThreadCount))
-    print(main.shuffle_deck())
+    if ThreadCount >= 1:
+      main.shuffle_deck(deck)
+      main.start_game(deck, cards_left, player_one_hand, player_two_hand)
+      pass
 Ss.close()
