@@ -1,9 +1,10 @@
 import socket
 import os
 from _thread import *
+import main
 
 Ss = socket.socket()
-LOCALHOST = "192.168.1.17"
+LOCALHOST = "192.168.83.72"
 PORT = 8080
 ThreadCount = 0
 
@@ -32,4 +33,5 @@ while True:
     start_new_thread(multi_threaded_client, (Client, ))
     ThreadCount += 1
     print('Thread Number: ' + str(ThreadCount))
+    print(main.shuffle_deck())
 Ss.close()

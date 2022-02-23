@@ -1,7 +1,7 @@
 import socket
 
 ClientMultiSocket = socket.socket()
-SERVER = "192.168.1.17"
+SERVER = "192.168.83.72"
 PORT = 8080
 
 print('Waiting for connection response')
