@@ -1,34 +1,35 @@
 import socket
+import os
+from _thread import *
 
+Ss = socket.socket()
 LOCALHOST = "192.168.1.17"
 PORT = 8080
+ThreadCount = 0
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind((LOCALHOST, PORT))
-server.listen(1)
+try:
+    Ss.bind((LOCALHOST, PORT))
+except socket.error as e:
+    print(str(e))
 
-print("Server started")
-print("Waiting for client request..")
+print('Socket is listening..')
+Ss.listen(5)
 
-
-
-msg = ''
+def multi_threaded_client(connection):
+    connection.send(str.encode('Server is working:'))
+    while True:
+        data = connection.recv(2048)
+        response = 'Server message: ' + data.decode('utf-8')
+        
+        if not data:
+            break
+        connection.sendall(str.encode(response))
+    connection.close()
 
 while True:
-  clientConnection,clientAddress = server.accept()
-
-  print("Connected clinet :" , clientAddress)
-
-  
-  in_data = clientConnection.recv(1024)
-  msg = in_data.decode()
-
-  if msg=='bye':
-    break
-
-  print("From Client :" , msg)
-  out_data = input("Message: ")
-  clientConnection.send(bytes(out_data,'UTF-8'))
-
-print("Client disconnected....")
-clientConnection.close()
+    Client, address = Ss.accept()
+    print('Connected to: ' + address[0] + ':' + str(address[1]))
+    start_new_thread(multi_threaded_client, (Client, ))
+    ThreadCount += 1
+    print('Thread Number: ' + str(ThreadCount))
+Ss.close()

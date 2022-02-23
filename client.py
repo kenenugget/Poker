@@ -1,17 +1,21 @@
 import socket
 
+ClientMultiSocket = socket.socket()
 SERVER = "192.168.1.17"
 PORT = 8080
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((SERVER, PORT))
-client.sendall(bytes("This is from Client",'UTF-8'))
+print('Waiting for connection response')
+
+try:
+    ClientMultiSocket.connect((SERVER, PORT))
+except socket.error as e:
+    print(str(e))
+
+res = ClientMultiSocket.recv(2048)
 
 while True:
-  in_data =  client.recv(1024)
-  print("From Server :" ,in_data.decode())
-  out_data = input("Message: ")
-  client.sendall(bytes(out_data,'UTF-8'))
-  if out_data=='bye':
-    break
-client.close()
+    Input = input('Hey there: ')
+    ClientMultiSocket.send(str.encode(Input))
+    res = ClientMultiSocket.recv(2048)
+    print(res.decode('utf-8'))
+ClientMultiSocket.close()
